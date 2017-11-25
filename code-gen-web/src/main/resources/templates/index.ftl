@@ -111,7 +111,7 @@
                 <label class="col-sm-2 control-label" for="inputTextarea">Create Table语句:</label>
                 <div class="col-sm-10">
                     <textarea rows="10" class="form-control" name="sql">
-CREATE TABLE `DP_DaoGen` (
+CREATE TABLE `IbatisCodeGen` (
     `Id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '唯一id',
     `Name` varchar(200) NOT NULL DEFAULT '' COMMENT '名称',
     `EnName` varchar(200) NOT NULL DEFAULT '' COMMENT '英文名，唯一',
@@ -119,7 +119,7 @@ CREATE TABLE `DP_DaoGen` (
     `AddTime` timestamp NOT NULL DEFAULT '2000-01-01 00:00:00' COMMENT '添加时间',
     `UpdateTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
     PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Dao生成器';</textarea>
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Ibatis代码生成器';</textarea>
                 </div>
             </div><!-- /form-group -->
             <div class="form-group">
