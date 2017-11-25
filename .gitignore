@@ -1,4 +1,16 @@
 target/
+.settings/
+.classpath
+.metadata
+.project
+.idea/
+*.iml
+out/
+.DS_Store
+node_modules
+rebel.xml
+classes/
+
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
