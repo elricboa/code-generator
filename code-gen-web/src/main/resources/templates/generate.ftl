@@ -127,7 +127,7 @@
                 <label class="col-sm-10 control-label" for="inputTextarea"><h3>AbstractDAOTest.java(供参考)</h3></label>
                 <div class="col-sm-20">
                     <textarea rows="20" class="form-control">
-package com.dianping.tuangou.navi.dal.dao.test;
+package fun.elricboa.tuangou.navi.dal.dao.test;
 
 import junit.framework.Assert;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -179,7 +179,7 @@ public abstract class AbstractDAOTest {
                 </div>
             </div><!-- /form-group -->
         </fieldset><!-- /fieldset -->
-    <div>另外，别忘了sqlmap-config.xml的配置！欢迎参与项目<a href="http://code.dianpingoa.com/yihua.huang/daogen/">http://code.dianpingoa.com/yihua.huang/daogen/</a>，更多功能敬请期待！</div>
+    <div>另外，别忘了sqlmap-config.xml的配置！欢迎参与项目<a href="http://www.github.com/elricboa/code-generator/">http://www.github.com/elricboa/code-generator/</a>，更多功能敬请期待！</div>
 </div><!-- /box -->
 
 

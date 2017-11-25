@@ -8,8 +8,8 @@ import java.util.List;
  * @author elricboa on 2017/11/25.
  */
 @Data
-public class Target {
-    private String sql;
-    private List<String> methods;
-    private Project project;
+public class Table {
+    private String name;
+    private List<String> columns;
+    private String comment;
 }

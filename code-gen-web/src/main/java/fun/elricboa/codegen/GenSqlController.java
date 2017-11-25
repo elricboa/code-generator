@@ -1,12 +1,13 @@
 package fun.elricboa.codegen;
 
+import fun.elricboa.codegen.domain.Target;
+import fun.elricboa.codegen.generator.GeneratorContext;
+import fun.elricboa.codegen.generator.dao.DaoGenerator;
 import org.assertj.core.util.Lists;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
 import java.util.List;
@@ -43,7 +44,14 @@ public class GenSqlController {
         methods.add(model.get("methods").toString());
         target.setMethods(methods);
         target.setProject(project);
-
+        DaoGenerator daoGenerator = new DaoGenerator();
+        try {
+            GeneratorContext generatorContext = daoGenerator.generateGeneratorContext(target);
+            String entity = new FreeMarkerRender(FreemarkerWrapper.getInstance().getTemplate("templates/entity.ftl")).render(generatorContext);
+            model.put("entity", entity);
+        } catch (Exception e) {
+            return "error";
+        }
         return "index";
     }
 }
