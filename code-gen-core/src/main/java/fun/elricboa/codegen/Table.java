@@ -10,6 +10,6 @@ import java.util.List;
 @Data
 public class Table {
     private String name;
-    private List<String> columns;
+    private List<Column> columns;
     private String comment;
 }

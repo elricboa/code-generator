@@ -3,18 +3,14 @@ package fun.elricboa.codegen;
 import fun.elricboa.codegen.domain.Target;
 import fun.elricboa.codegen.generator.GeneratorContext;
 import fun.elricboa.codegen.generator.dao.DaoGenerator;
-import org.assertj.core.util.Lists;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 /**
