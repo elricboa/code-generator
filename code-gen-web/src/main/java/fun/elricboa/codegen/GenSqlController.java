@@ -8,7 +8,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -33,16 +37,23 @@ public class GenSqlController {
 
     @GetMapping("/index")
     public String index(Map<String, Object> model) {
+        return "index";
+    }
+
+    @GetMapping("/generate")
+    public String generate(Map<String, Object> model,
+                           @RequestParam(value = "basePackage") String basePackage,
+                           @RequestParam(value = "sql") String sql,
+                           @RequestParam(value = "methods") String methods) {
         Project project = new Project();
-        project.setBasePackage(String.valueOf(model.get("basePackage")));
+        project.setBasePackage(basePackage);
         project.setDaoPackage(project.getBasePackage() + ".dao");
         project.setEntityPackage(project.getBasePackage() + ".entity");
         project.setDaoRealizeTarget("dao-Realize-Target");
         Target target = new Target();
-        target.setSql(model.get("sql").toString());
-        List<String> methods = Lists.newArrayList();
-        methods.add(model.get("methods").toString());
-        target.setMethods(methods);
+        target.setSql(sql);
+        String[] method = methods.split(",");
+        target.setMethods(Arrays.asList(method));
         target.setProject(project);
         DaoGenerator daoGenerator = new DaoGenerator();
         try {
@@ -52,6 +63,6 @@ public class GenSqlController {
         } catch (Exception e) {
             return "error";
         }
-        return "index";
+        return "generate";
     }
 }

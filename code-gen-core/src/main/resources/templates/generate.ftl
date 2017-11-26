@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,width=device-width,height=device-height,target-densitydpi=device-dpi,user-scalable=yes" />
-    <title>Dao生成器</title>
+    <title>IbatisDao生成器</title>
 
     <!-- fav and touch icons -->
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/app/ico/apple-touch-icon-144-precomposed.png">
@@ -96,58 +96,90 @@
                 <li><a class="form-theme" data-toggle="disabled-fieldset" href="#">Toggle Disable</a></li>
             </ul>
         </div>
-        输入参数
+        查看结果
     </h2>
-    <form class="form-horizontal" role="form" action="/generate">
         <fieldset>
             <div class="form-group">
-                <label class="col-sm-2 control-label" for="input">基本包名:</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="input" name="basePackage" value="fun.elricboa.daogen" placeholder="fun.elricboa.daogen" >
+                <label class="col-sm-10 control-label" for="inputTextarea"><h3>${model.name}Entity.java</h3></label>
+                <div class="col-sm-20">
+                    <textarea rows="20" class="form-control">${entity}</textarea>
                 </div>
             </div><!-- /form-group -->
+            <div class="form-group">
+                <label class="col-sm-10 control-label" for="inputTextarea"><h3>${model.name}Dao.java</h3></label>
+                <div class="col-sm-20">
+                    <textarea rows="20" class="form-control">${dao}</textarea>
+                </div>
+            </div><!-- /form-group -->
+            <div class="form-group">
+                <label class="col-sm-10 control-label" for="inputTextarea"><h3>${model.name}.xml</h3></label>
+                <div class="col-sm-20">
+                    <textarea rows="20" class="form-control">${sqlMap}</textarea>
+                </div>
+            </div><!-- /form-group -->
+            <div class="form-group">
+                <label class="col-sm-10 control-label" for="inputTextarea"><h3>${model.name}DaoTest.java</h3></label>
+                <div class="col-sm-20">
+                    <textarea rows="20" class="form-control">${test}</textarea>
+                </div>
+            </div><!-- /form-group -->
+            <div class="form-group">
+                <label class="col-sm-10 control-label" for="inputTextarea"><h3>AbstractDAOTest.java(供参考)</h3></label>
+                <div class="col-sm-20">
+                    <textarea rows="20" class="form-control">
+package com.dianping.tuangou.navi.dal.dao.test;
 
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="inputTextarea">Create Table语句:</label>
-                <div class="col-sm-10">
-                    <textarea rows="10" class="form-control" name="sql">
-CREATE TABLE `IbatisCodeGen` (
-    `Id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '唯一id',
-    `Name` varchar(200) NOT NULL DEFAULT '' COMMENT '名称',
-    `EnName` varchar(200) NOT NULL DEFAULT '' COMMENT '英文名，唯一',
-    `Status` int(11) NOT NULL DEFAULT '0' COMMENT '状态，为0表示不可用',
-    `AddTime` timestamp NOT NULL DEFAULT '2000-01-01 00:00:00' COMMENT '添加时间',
-    `UpdateTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-    PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Ibatis代码生成器';</textarea>
+import junit.framework.Assert;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath*:config/spring/local/appcontext-*.xml","classpath*:config/spring/common/appcontext-*.xml" })
+public abstract class AbstractDAOTest {
+
+    protected void print(Object obj) {
+        System.out.println(ToStringBuilder.reflectionToString(obj, ToStringStyle.MULTI_LINE_STYLE));
+    }
+
+    private long start;
+
+    public void notNull(Object obj) {
+        assertNotNull(obj);
+    }
+
+    public void isNull(Object obj) {
+        assertNull(obj);
+    }
+
+    public void equal(Object expected, Object actual) {
+        Assert.assertEquals(expected, actual);
+    }
+
+    public void start() {
+        this.start = System.currentTimeMillis();
+    }
+
+    public void end() {
+        System.out.println("耗时: " + (System.currentTimeMillis() - start) + "ms");
+    }
+}
+                    </textarea>
                 </div>
             </div><!-- /form-group -->
             <div class="form-group">
-                <label class="col-sm-2 control-label" for="inputMultiple">Dao的方法:</label>
-                <div class="col-sm-10">
-                    <select class="form-control" name="methods" id="method" multiple>
-                        <option selected>insert</option>
-                        <option selected>loadById</option>
-                        <option selected>findByIds</option>
-                        <option>findByStartId</option>
-                    </select>
-                </div>
-            </div><!-- /form-group -->
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="inputMultiple">说明:</label>
-                <div class="col-sm-10">
-                    <p>可生成Entity、Dao、SqlMap及Test，支持的方法会逐渐增加</p>
-                    <p>代码地址:<a href="http://code.dianpingoa.com/yihua.huang/daogen/" target="_blank">http://code.dianpingoa.com/yihua.huang/daogen/</a></p>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="reset" class="btn btn-default">Reset</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                <label class="col-sm-10 control-label" for="inputTextarea"><h3>appcontext-xxx-dao.xml</h3></label>
+                <div class="col-sm-20">
+                    <textarea rows="10" class="form-control">${springConfig}</textarea>
                 </div>
             </div><!-- /form-group -->
         </fieldset><!-- /fieldset -->
-    </form><!-- /form -->
+    <div>另外，别忘了sqlmap-config.xml的配置！欢迎参与项目<a href="http://code.dianpingoa.com/yihua.huang/daogen/">http://code.dianpingoa.com/yihua.huang/daogen/</a>，更多功能敬请期待！</div>
 </div><!-- /box -->
 
 
