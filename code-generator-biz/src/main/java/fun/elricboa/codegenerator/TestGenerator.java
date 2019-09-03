@@ -1,3 +1,5 @@
+package fun.elricboa.codegenerator;
+
 import java.io.*;
 
 /**
@@ -29,7 +31,7 @@ public class TestGenerator {
         String DaoGenTest = "package fun.elricboa.codegenerator.dao;\n" +
                 "\n" +
                 "import fun.elricboa.codegenerator.entity.DaoGen;\n" +
-                "import com.dianping.tuangou.navi.dal.dao.test.AbstractDAOTest;\n" +
+                "import fun.elricboa.codegenerator.dal.dao.test.AbstractDAOTest;\n" +
                 "import org.junit.Before;\n" +
                 "import org.junit.Test;\n" +
                 "import java.util.Date;\n" +
@@ -42,13 +44,13 @@ public class TestGenerator {
                 "\n" +
                 "/**\n" +
                 "*\n" +
-                "* Create by daogen http://daohelper.dp/\n" +
+                "* Create by elricboa\n" +
                 "*\n" +
                 "*/\n" +
-                "public class CodecodeGeneratorTest extends AbstractDAOTest {\n" +
+                "public class CodeGeneratorTest extends AbstractDAOTest {\n" +
                 "\n" +
                 "	@Autowired\n" +
-                "	private CodecodeGenerator codeGenerator;\n" +
+                "	private CodeGenerator codeGenerator;\n" +
                 "\n" +
                 "	private DaoGen daoGen;\n" +
                 "\n" +
@@ -83,7 +85,7 @@ public class TestGenerator {
                 "\n";
         writeFile(formatPath(javaPath, "test", "dao"), "CodeGeneratorTest.java", DaoGenTest);
 
-        String DaoGenSpringConfig = "<bean name=\"codecodeGenerator\" parent=\"parentDao\">\n" +
+        String DaoGenSpringConfig = "<bean name=\"codeGenerator\" parent=\"parentDao\">\n" +
                 "    <property name=\"proxyInterfaces\"\n" +
                 "              value=\"fun.elricboa.codegenerator.dao.CodeGenerator\" />\n" +
                 "    <property name=\"target\">\n" +
